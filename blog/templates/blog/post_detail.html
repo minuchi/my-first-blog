@@ -11,9 +11,8 @@
     <div class="newsfeed_contents">
       <p>
         <strong>{{post.title}}</strong>
-      </p>
-      <p>
-        {{post.text}}
+      <br>
+        {{ post.text|linebreaksbr }}
       </p>
       <div style="text-align:right;">
         <form class="form" action="" method="post">
@@ -22,17 +21,25 @@
           </div>
           <div class="lower">
             {% if post.published_date %}
-              <span class="published_date">게시된 날짜 : {{post.published_date}}</span>
+              <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
               <br>
             {% endif %}
-              <div class="buttons_margin" style="top:25px;">
-              <button type="button" class="btn btn-primary" style="">게시</button>
-              <div class="btn-group" data-toggle="buttons" style="">
-                <label class="btn btn-primary">
-                  <input type="checkbox" autocomplete="off"> 추천
-                </label>
+            <div class="buttons_margin" style="top:25px;">
+              <script>
+                function fn_edit() {
+                  location.href="{% url 'post_edit' pk=post.pk %}"
+                }
+              </script>
+              <button type="button" class="btn btn-primary" onclick="fn_edit()">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+              <button type="submit" class="btn btn-primary" style="">게시</button>
+                <div class="btn-group" data-toggle="buttons" style="">
+                  <label class="btn btn-primary">
+                    <input type="checkbox" autocomplete="off">추천
+                  </label>
+                </div>
               </div>
-            </div>
           </div>
         </form>
       </div>

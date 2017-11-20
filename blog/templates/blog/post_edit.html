@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="mo-margin mo-round mo-card mo-white">
+    <!-- 글 내용 -->
+    <div class="newsfeed_contents">
+      <form name="editForm" id="upload" method="POST">{% csrf_token %}
+        <p>
+          <input type="text" name="title" class="form-control" placeholder="제목" value="{{ post.title }}" required id="id_title">
+          <textarea name="text" class="form-control" rows="4" placeholder="회원님의 소식을 팔로워들에게 전하세요!" style="margin-bottom:8px;" required id="id_text">{{ post.text }}
+          </textarea>
+        </p>
+        <div style="text-align:right;"><button type="submit" class="btn btn-primary" style="">게시</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
