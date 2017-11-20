@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+  <div class="mo-margin mo-round mo-card mo-white">
+    <!-- 글 올린 회원의 사진, 이름 -->
+    <p class="newsfeed_profiles">
+      <img src="https://www.w3schools.com/w3images/avatar3.png" alt="" class="img-circle peopleImg">{{post.author}}
+    </p>
+    <!-- 글 내용 -->
+    <div class="newsfeed_contents">
+      <p>
+        <strong>{{post.title}}</strong>
+      </p>
+      <p>
+        {{post.text}}
+      </p>
+      <div style="text-align:right;">
+        <form class="form" action="" method="post">
+          <div class="form-group" style="text-align:left;">
+            <input type="text" class="form-control" placeholder="댓글을 입력하세요" style="">
+          </div>
+          <div class="lower">
+            {% if post.published_date %}
+              <span class="published_date">게시된 날짜 : {{post.published_date}}</span>
+              <br>
+            {% endif %}
+              <div class="buttons_margin" style="top:25px;">
+              <button type="button" class="btn btn-primary" style="">게시</button>
+              <div class="btn-group" data-toggle="buttons" style="">
+                <label class="btn btn-primary">
+                  <input type="checkbox" autocomplete="off"> 추천
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
