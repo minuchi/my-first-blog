@@ -1,0 +1,25 @@
+{% extends "blog/baseforlogin.html" %}
+
+{% block content %}
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="mo-margin mo-round mo-card mo-white" style="text-align:center;">
+          <h2 style="margin-top:0px;margin-bottom:10px;">로그인</h2>
+          <form method="post" class="form-inline" action="{% url 'login' %}">{% csrf_token %}
+            <div class="form-group">
+              <label class="sr-only" for="id_username">username</label>
+              <input type="text" class="form-control" placeholder="아이디 입력" name="username" autofocus maxlength="254" required id="id_username" />
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="id_password">password</label>
+              <input type="password" class="form-control" placeholder="비밀번호 입력" name="password" required id="id_password" />
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default">로그인</button>
+            </div>
+          </form>
+          {% if form.errors %}
+              <p style="margin-top:20px;">Your username and password didn't match. Please try again.</p>
+          {% endif %}
+        </div>
+      </div>
+{% endblock %}
