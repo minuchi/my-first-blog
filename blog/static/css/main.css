@@ -1,5 +1,8 @@
 @media (max-width: 768px) { #etc {display: none;} }
 
+@media (max-width: 512px) { .lower>.buttons_margin {padding-top:20px;top:15px;}
+                             .main-lower>.buttons_margin {padding-top:20px;} }
+
 html body {
   background-color:#EAEAEA;
 }
@@ -37,7 +40,6 @@ html body h3 {
 .newsfeed_profiles {
 
 }
-
 .newsfeed_contents {
   margin: 10px;
 }
@@ -47,11 +49,12 @@ html body h3 {
   margin-left: 10px;
   margin-right: 10px;
 }
-
 .lower {
-  margin-top: 10px
+  margin-top: 5px
 }
-
+.main-lower {
+  margin-top: 5px
+}
 .buttons_margin {
   position: relative;
   top: 10px;

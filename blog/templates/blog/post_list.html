@@ -44,11 +44,12 @@
               </div>
               <!-- 댓글 작성 및 추천 -->
               <div style="text-align:right;">
+                <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
                 <form class="form" action="" method="post">
                   <div class="form-group" style="text-align:left;">
                     <input type="text" class="form-control" placeholder="댓글을 입력하세요" style="">
                   </div>
-                  <div class="lower">
+                  <!-- <div class="lower">
                     {% if post.published_date %}
                       <span class="published_date">게시된 날짜 : {{post.published_date}}</span>
                       <br>
@@ -60,6 +61,19 @@
                           <input type="checkbox" autocomplete="off"> 추천
                         </label>
                       </div>
+                    </div>
+                  </div> -->
+                  <div class="main-lower">
+                      {% if post.published_date %}
+                      <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
+                      {% endif %}
+                      <div class="buttons_margin" style="">
+                      <button type="submit" class="btn btn-primary" style="">게시</button>
+                        <div class="btn-group" data-toggle="buttons" style="">
+                          <label class="btn btn-primary">
+                            <input type="checkbox" autocomplete="off">추천
+                          </label>
+                        </div>
                     </div>
                   </div>
                 </form>

@@ -14,17 +14,42 @@
       <br>
         {{ post.text|linebreaksbr }}
       </p>
-      <div style="text-align:right;">
-        <form class="form" action="" method="post">
-          <div class="form-group" style="text-align:left;">
-            <input type="text" class="form-control" placeholder="댓글을 입력하세요" style="">
+      <div>
+        <form class="form" action="" method="post">{% csrf_token %}
+          <table class="table table-striped">
+            {% for comment in comments.all %}
+            <tr>
+              <td>{{ comment.text}}</td>
+              <td>{{ comment.author }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="background-color:white;">
+              <td style="width:80%;">
+                <input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요" style="" required id="id_text">
+              </td>
+              <td>
+                <button type="submit" class="btn btn-primary" style="">게시</button>
+                <div class="btn-group" data-toggle="buttons" style="">
+                  <label class="btn btn-primary">
+                    <input type="checkbox" autocomplete="off">추천
+                  </label>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <!-- <div style="text-align:right;">
+        <form class="form" action="" method="post">{% csrf_token %}
+          <div class="form-group" style="text-align:left;margin-top:30px;">
+            <input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요" style="" required id="id_text">
           </div>
           <div class="lower">
-            {% if post.published_date %}
+              {% if post.published_date %}
               <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
-              <br>
-            {% endif %}
-            <div class="buttons_margin" style="top:25px;">
+              {% endif %}
+              <div class="buttons_margin" style="">
+              {% if request.user is post.author %}
               <script>
                 function fn_edit() {
                   location.href="{% url 'post_edit' pk=post.pk %}"
@@ -33,16 +58,17 @@
               <button type="button" class="btn btn-primary" onclick="fn_edit()">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
+              {% endif %}
               <button type="submit" class="btn btn-primary" style="">게시</button>
                 <div class="btn-group" data-toggle="buttons" style="">
                   <label class="btn btn-primary">
                     <input type="checkbox" autocomplete="off">추천
                   </label>
                 </div>
-              </div>
+            </div>
           </div>
         </form>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
