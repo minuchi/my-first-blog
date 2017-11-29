@@ -17,8 +17,11 @@
               <button type="submit" class="btn btn-default">로그인</button>
             </div>
           </form>
+          <div>
+            <p style="margin-top:20px;">비회원 계정 : guest<br> 비밀번호 : a12345678</p>
+          </div>
           {% if form.errors %}
-              <p style="margin-top:20px;">Your username and password didn't match. Please try again.</p>
+              <p style="margin-top:20px;">아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
           {% endif %}
         </div>
       </div>

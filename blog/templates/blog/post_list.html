@@ -8,15 +8,12 @@
                 <h3>My Profile</h3>
                 <img src="https://www.w3schools.com/w3images/avatar3.png" alt="" class="img-circle profileImg"><br>
                 <p>
-                  <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Pull-Stack Programmer<br>
-                  <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Seoul, Korea<br>
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;November 28, 1998
+                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{request.user}}
                 </p>
               </div>
             </div>
           </div>
           <!-- 뉴스피드 부분 -->
-
           <div class="col-xs-12 col-sm-8 col-md-7">
             <!-- 글 게시 부분 -->
             <div class="mo-margin mo-round mo-card mo-white" style="text-align:right;padding-bottom:12px;">
@@ -39,51 +36,28 @@
                 <p style="">
                   <a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a>
                   <br>
-                  {{post.text}}
+                  {{post.text}}<br>
+                  {% if post.published_date %}
+                  <span class="published_date" style="margin:5px 0px;">게시된 날짜 : {{post.published_date}}</span>
+                  {% endif %}
                 </p>
               </div>
               <!-- 댓글 작성 및 추천 -->
               <div style="text-align:right;">
-                <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
-                <form class="form" action="" method="post">
-                  <div class="form-group" style="text-align:left;">
-                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" style="">
+                <div class="main-lower">
+                  <div class="buttons_margin" style="">
+                    <a class="btn btn-primary"href="{% url 'post_detail' pk=post.pk %}">
+                      댓글{% if post.comments.count > 0 %} <span class="badge">{{ post.comments.count }}</span>{% endif %}
+                    </a>
                   </div>
-                  <!-- <div class="lower">
-                    {% if post.published_date %}
-                      <span class="published_date">게시된 날짜 : {{post.published_date}}</span>
-                      <br>
-                    {% endif %}
-                      <div class="buttons_margin">
-                      <button type="button" class="btn btn-primary" style="">게시</button>
-                      <div class="btn-group" data-toggle="buttons" style="">
-                        <label class="btn btn-primary">
-                          <input type="checkbox" autocomplete="off"> 추천
-                        </label>
-                      </div>
-                    </div>
-                  </div> -->
-                  <div class="main-lower">
-                      {% if post.published_date %}
-                      <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
-                      {% endif %}
-                      <div class="buttons_margin" style="">
-                      <button type="submit" class="btn btn-primary" style="">게시</button>
-                        <div class="btn-group" data-toggle="buttons" style="">
-                          <label class="btn btn-primary">
-                            <input type="checkbox" autocomplete="off">추천
-                          </label>
-                        </div>
-                    </div>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
             {% endfor %}
           </div>
           <!-- 기타 부분 -->
           <div class="col-sm-4 col-md-2">
-            <div id="etc" class="mo-margin mo-round mo-card mo-white">
-              기타
+            <div id="etc" class="mo-margin mo-round mo-card mo-white mo-center">
+              Google Adsense
             </div>
 {% endblock %}

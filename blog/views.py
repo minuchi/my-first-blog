@@ -31,6 +31,7 @@ def post_detail(request, pk):
             comment = form.save(commit=False)
             comment.author = request.user
             comment.post = post
+            comment.approved_comment = True
             comment.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -58,4 +59,11 @@ def post_edit(request, pk):
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
-    return redirect(url)
+    return redirect('post_list')
+
+#댓글 삭제
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('post_detail', pk=comment.post.pk)

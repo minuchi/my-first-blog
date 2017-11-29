@@ -9,66 +9,55 @@
     </p>
     <!-- 글 내용 -->
     <div class="newsfeed_contents">
-      <p>
+      <p style="margin-bottom:10px;">
         <strong>{{post.title}}</strong>
       <br>
-        {{ post.text|linebreaksbr }}
+        {{ post.text|linebreaksbr }}<br>
+        {% if post.published_date %}
+        <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
+        {% endif %}
       </p>
-      <div>
+      <!-- 댓글 달기 -->
+      <div class="detail_table">
         <form class="form" action="" method="post">{% csrf_token %}
-          <table class="table table-striped">
-            {% for comment in comments.all %}
+          <table class="table table-striped" id="Rtable">
+            {% for comment in post.comments.all %}
             <tr>
-              <td>{{ comment.text}}</td>
-              <td>{{ comment.author }}</td>
+              <td style="width:15%;min-width:110px;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{ comment.author }}</td>
+              <td>
+                {{ comment.text }}
+                <a href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove-circle" style="float:right;"></span></a>
+              </td>
             </tr>
             {% endfor %}
-            <tr style="background-color:white;">
+            <!-- <tr style="background-color:white;">
               <td style="width:80%;">
                 <input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요" style="" required id="id_text">
               </td>
               <td>
                 <button type="submit" class="btn btn-primary" style="">게시</button>
-                <div class="btn-group" data-toggle="buttons" style="">
-                  <label class="btn btn-primary">
-                    <input type="checkbox" autocomplete="off">추천
-                  </label>
-                </div>
               </td>
-            </tr>
+            </tr> -->
           </table>
         </form>
       </div>
-      <!-- <div style="text-align:right;">
+      <div style="text-align:right;">
         <form class="form" action="" method="post">{% csrf_token %}
-          <div class="form-group" style="text-align:left;margin-top:30px;">
+          <div class="form-group" style="text-align:left;">
             <input type="text" name="text" class="form-control" placeholder="댓글을 입력하세요" style="" required id="id_text">
           </div>
           <div class="lower">
-              {% if post.published_date %}
-              <span class="published_date" style="margin:0px;">게시된 날짜 : {{post.published_date}}</span>
-              {% endif %}
               <div class="buttons_margin" style="">
-              {% if request.user is post.author %}
-              <script>
-                function fn_edit() {
-                  location.href="{% url 'post_edit' pk=post.pk %}"
-                }
-              </script>
-              <button type="button" class="btn btn-primary" onclick="fn_edit()">
+              {% if request.user == post.author %}
+              <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}">
                 <span class="glyphicon glyphicon-pencil"></span>
-              </button>
+              </a>
               {% endif %}
               <button type="submit" class="btn btn-primary" style="">게시</button>
-                <div class="btn-group" data-toggle="buttons" style="">
-                  <label class="btn btn-primary">
-                    <input type="checkbox" autocomplete="off">추천
-                  </label>
-                </div>
             </div>
           </div>
         </form>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>
